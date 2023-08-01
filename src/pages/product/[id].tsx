@@ -3,6 +3,9 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { stripe } from '../../lib/stripe';
 import Stripe from 'stripe';
 import Image from 'next/image';
+import axios from 'axios';
+import { useState } from 'react';
+import Head from 'next/head';
 
 interface ProductProps {
   product: {
@@ -16,25 +19,48 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  function handleBuyShirt() {
-    console.log(product.defaultPriceId)
+  const [isCreatingCheckoutSection, setIsCreateCheckoutSection] = useState(false);
+
+  async function handleBuyProduct() {
+    try {
+      setIsCreateCheckoutSection(true);
+
+      const response = await axios.post('/api/checkout', {
+        priceId: product.defaultPriceId
+      })
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+
+    } catch (err) {
+      setIsCreateCheckoutSection(false);
+      alert('Erro ao redirecionar para o checkout!')
+
+    }
   }
 
   return (
-    <ProductContainer>
-      <ImageContainer>
-        <Image src={product.imageUrl} width={520} height={480} alt="" />
-      </ImageContainer>
+    <>
+      <Head>
+        <title>{product.name} | Ignite Shop</title>
+      </Head>
 
-      <ProductDetails>
-        <h1>{product.name}</h1>
-        <span>{product.price}</span>
+      <ProductContainer>
+        <ImageContainer>
+          <Image src={product.imageUrl} width={520} height={480} alt="" />
+        </ImageContainer>
 
-        <p>{product.description}</p>
+        <ProductDetails>
+          <h1>{product.name}</h1>
+          <span>{product.price}</span>
 
-        <button onClick={handleBuyShirt}>Comprar Agora</button>
-      </ProductDetails>
-    </ProductContainer>
+          <p>{product.description}</p>
+
+          <button onClick={handleBuyProduct} disabled={isCreatingCheckoutSection}>Comprar Agora</button>
+        </ProductDetails>
+      </ProductContainer>
+    </>
   )
 }
 
@@ -47,7 +73,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         }
       }
     ],
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
