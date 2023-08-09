@@ -34,10 +34,17 @@ export const Bag = styled('div', {
   justifyContent: 'center',
   alignItems: 'center',
   cursor: 'pointer',
-
+  
   svg: {
-    opacity: 0.6
+    opacity: 0.6,
+    transition: '400ms',
   },
+
+  '&:hover': {
+    svg: {
+      opacity: 1
+    },
+  }
 
 })
 

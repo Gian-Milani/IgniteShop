@@ -32,13 +32,13 @@ export const Product = styled(Link, {
     bottom: '0.25rem',
     left: '0.25rem',
     right: '0.25rem',
-    padding: '2rem',
-
-    borderRadius: 6,
+    padding: '1.25rem',
 
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'space-between',
+    alignItems: 'center',
+
+    borderRadius: 6,
 
     backgroundColor: 'rgba(0, 0, 0, 0.6)',
 
@@ -46,17 +46,23 @@ export const Product = styled(Link, {
     opacity: 0,
     transition: 'all 0.2s ease-in-out',
 
-    strong: {
-      fontSize: '$lg',
-      color: '$gray100'
-    },
+    section: {
+      display: 'flex',
+      flexDirection: 'column',
 
-    span: {
-      fontSize: '$xl',
-      fontWeight: 'bold',
-      color: '$green300'
+      strong: {
+        fontSize: '$lg',
+        color: '$gray100',
+        marginBottom: '0.25rem',
+      },
+  
+      span: {
+        fontSize: '$xl',
+        fontWeight: 'bold',
+        color: '$green300'
+      },  
     },
-
+    
   },
 
   '&:hover': {
@@ -65,4 +71,23 @@ export const Product = styled(Link, {
       opacity: 1,
     },
   }
+});
+
+export const Bag = styled('div', {
+  width: '3rem',
+  height: '3rem',
+  borderRadius: 6,
+  backgroundColor: '$green500',
+
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  cursor: 'pointer',
+
+  transition: 'background 400ms',
+
+  '&:hover': {
+    backgroundColor: '$green300'
+  }
+
 });

@@ -4,6 +4,7 @@ import logoImg from '../assets/logo.svg'
 import Image from "next/image";
 import { Bag, BagContainer, BagNotification, Container, Header } from "../styles/pages/app";
 import { Handbag } from "phosphor-react";
+import { ShoppingBag } from "../components/ShoppingBag";
 
 globalStyles();
 
@@ -20,6 +21,8 @@ export default function App({ Component, pageProps }: AppProps) {
           </Bag>
           <BagNotification>1</BagNotification>
         </BagContainer>
+
+        <ShoppingBag />
       </Header>
 
       <Component {...pageProps} />
