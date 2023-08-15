@@ -1,5 +1,60 @@
-import { ShoppingBagContainer } from "./styles";
+import { ShoppingBagContainer, CloseContainer, BagItensContainer, ItemContainer, ImageContainer, DescriptionContainer, BagResumeContainer} from "./styles";
+import { X } from 'phosphor-react';
+import Image from 'next/image';
+import shirt from '../../assets/t-shirt.svg'
+
 
 export function ShoppingBag () {
-  return <ShoppingBagContainer>Hello world</ShoppingBagContainer>
+  return (
+    <ShoppingBagContainer>
+      <CloseContainer>
+        <X  size={24} weight="bold"/>
+      </CloseContainer>
+      <main>
+        <h3>Sacola de compras</h3>
+
+        <BagItensContainer>
+
+          <ItemContainer>
+            <ImageContainer>
+              <Image src={shirt} width={100} height={96} color='white' alt="" />
+            </ImageContainer>
+
+            <DescriptionContainer>
+              <h4>Camiseta de teste</h4>
+              <strong>R$79,00</strong>
+              <button>Remover</button>
+            </DescriptionContainer>
+          </ItemContainer>
+
+          <ItemContainer>
+            <ImageContainer>
+              <Image src={shirt} width={100} height={96} alt="" />
+            </ImageContainer>
+            
+            <DescriptionContainer>
+              <h4>Camiseta de teste</h4>
+              <strong>R$79,00</strong>
+              <button>Remover</button>
+            </DescriptionContainer>
+          </ItemContainer>
+
+        </BagItensContainer>
+
+        <BagResumeContainer>
+          <p>
+            <span>Quantidade</span>
+            <span>3 Itens</span>
+          </p>
+
+          <p>
+            <strong>Valor Total</strong>
+            <strong>R$250,00</strong>
+          </p>
+
+          <button>Finalizar Compra</button>
+        </BagResumeContainer>
+      </main>
+    </ShoppingBagContainer>
+  )
 }

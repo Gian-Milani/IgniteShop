@@ -8,4 +8,82 @@ export const ShoppingBagContainer = styled('div', {
   position: 'fixed',
   top: 0,
   right: 0,
+
+  padding: '1.5rem',
+  zIndex: 1,
+
+  main: {
+    height: '100%',
+    margin: '1.5rem',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  }
+})
+
+export const CloseContainer = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  transition: 'opacity 400ms',
+  opacity: '0.8',
+
+  '&:hover': {
+    opacity: '1',
+    cursor: 'pointer',
+  }
+})
+
+export const BagItensContainer = styled('div', {
+  marginTop: '2rem',
+  display: 'flex',
+  flexDirection: 'column',  
+})
+
+export const ItemContainer = styled('div', {
+  marginBottom: '1.5rem',
+  display: 'flex',  
+  gap: '1.25rem',
+
+})
+
+export const ImageContainer = styled('div', {
+  width: '6.25rem',
+  height: '6rem',
+  background: 'linear-gradient(180deg, #1EA483 0%,  #7465D4 100%)',
+  borderRadius: 8,
+})
+
+export const DescriptionContainer = styled('div', {
+  padding: '0.5rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.8rem',
+
+  h4: {
+    color: '$gray300',
+    fontSize: '$md',
+  },
+
+  strong: {
+    color: '$white',
+  },
+
+  button: {
+    border: 'none',
+    backgroundColor: '$gray800',
+    color: '$green500',
+    fontWeight: 'bold',
+    textAlign: 'left',
+    transition: 'color 400ms',
+
+    '&:hover': {
+      cursor: 'pointer',
+      color: '$green300',
+    }
+  }
+})
+
+export const BagResumeContainer = styled('div', {
+
 })
