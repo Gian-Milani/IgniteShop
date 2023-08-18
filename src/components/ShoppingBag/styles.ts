@@ -13,7 +13,7 @@ export const ShoppingBagContainer = styled('div', {
   zIndex: 1,
 
   main: {
-    height: '100%',
+    height: '90vh',
     margin: '1.5rem',
     display: 'flex',
     flexDirection: 'column',
@@ -35,9 +35,14 @@ export const CloseContainer = styled('div', {
 })
 
 export const BagItensContainer = styled('div', {
-  marginTop: '2rem',
   display: 'flex',
   flexDirection: 'column',  
+
+  h3: {
+    marginBottom: '2rem',
+    fontWeight: 'bold',
+    fontSize: '$lg'
+  }
 })
 
 export const ItemContainer = styled('div', {
@@ -58,7 +63,7 @@ export const DescriptionContainer = styled('div', {
   padding: '0.5rem',
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.8rem',
+  gap: '0.7rem',
 
   h4: {
     color: '$gray300',
@@ -75,6 +80,7 @@ export const DescriptionContainer = styled('div', {
     color: '$green500',
     fontWeight: 'bold',
     textAlign: 'left',
+    fontSize: '1rem',
     transition: 'color 400ms',
 
     '&:hover': {
@@ -85,5 +91,50 @@ export const DescriptionContainer = styled('div', {
 })
 
 export const BagResumeContainer = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.8rem',
+
+  p: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+
+    span: {
+      color: '$gray300',
+      fontSize: '$md',
+    },
+
+    strong: {
+      color: '$white',
+      fontSize: '$xl',
+      
+      '&:first-child': {
+        fontSize: '$md',
+      }
+    },
+  },
+
+  button: {
+    height: '4rem',
+
+    fontWeight: 'bold',
+    fontSize: '$md',
+
+    border: 'none',
+    borderRadius: 8,
+
+    backgroundColor: '$green500',
+    color: '$white',
+
+    transition: 'background 400ms',
+
+    marginTop: '3.5rem',
+
+    '&:hover': {
+      cursor: 'pointer',
+      backgroundColor: '$green300',
+    }
+  }
 
 })

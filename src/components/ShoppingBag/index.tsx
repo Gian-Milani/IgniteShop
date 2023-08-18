@@ -11,10 +11,9 @@ export function ShoppingBag () {
         <X  size={24} weight="bold"/>
       </CloseContainer>
       <main>
-        <h3>Sacola de compras</h3>
-
+        
         <BagItensContainer>
-
+          <h3>Sacola de compras</h3>
           <ItemContainer>
             <ImageContainer>
               <Image src={shirt} width={100} height={96} color='white' alt="" />
@@ -38,7 +37,6 @@ export function ShoppingBag () {
               <button>Remover</button>
             </DescriptionContainer>
           </ItemContainer>
-
         </BagItensContainer>
 
         <BagResumeContainer>
