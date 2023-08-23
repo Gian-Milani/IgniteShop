@@ -1,4 +1,5 @@
 import { styled } from "@stitches/react";
+import { bagTransition } from "../../styles/global";
 
 export const ShoppingBagContainer = styled('div', {
   width: '100%',
@@ -12,26 +13,38 @@ export const ShoppingBagContainer = styled('div', {
   padding: '1.5rem',
   zIndex: 1,
 
+  animation: `${bagTransition} 400ms normal` ,
+
   main: {
     height: '90vh',
     margin: '1.5rem',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-  }
+  },  
 })
 
 export const CloseContainer = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
-  transition: 'opacity 400ms',
-  opacity: '0.8',
 
-  '&:hover': {
-    opacity: '1',
-    cursor: 'pointer',
+  button: {
+    border: 'none',
+    background: 'transparent',
+
+    svg: {
+      color: 'white',
+      opacity: '0.8',
+      transition: 'opacity 200ms',
+
+      '&:hover': {
+        opacity: '1',
+        cursor: 'pointer',
+      }
+    },
   }
+
 })
 
 export const BagItensContainer = styled('div', {

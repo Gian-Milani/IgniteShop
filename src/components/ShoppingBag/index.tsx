@@ -2,13 +2,20 @@ import { ShoppingBagContainer, CloseContainer, BagItensContainer, ItemContainer,
 import { X } from 'phosphor-react';
 import Image from 'next/image';
 import shirt from '../../assets/t-shirt.svg'
+import { useState } from "react";
 
+interface ShoppingBagProps {
+  handleBag: (action) => void;
+}
 
-export function ShoppingBag () {
+export function ShoppingBag ({ handleBag }: ShoppingBagProps) {
+
   return (
     <ShoppingBagContainer>
       <CloseContainer>
-        <X  size={24} weight="bold"/>
+        <button onClick={() => handleBag(false)}>
+          <X  size={24} weight="bold"/>
+        </button>
       </CloseContainer>
       <main>
         
