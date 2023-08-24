@@ -10,6 +10,8 @@ import { Bag, HomeContainer, Product } from "../styles/pages/home"
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css';
 import { Handbag } from "phosphor-react";
+import { useContext } from "react";
+import { BagContext } from "../contexts/BagContext";
 
 interface HomeProps {
   products: {
@@ -28,6 +30,13 @@ export default function Home({ products }: HomeProps) {
     }
   })
 
+  const { bagList, addProductToBag } = useContext(BagContext)
+
+  function handleAddProductToBag() {
+    addProductToBag();
+    console.log(bagList)
+  }
+
   return (
     <>
       <Head>
@@ -38,10 +47,8 @@ export default function Home({ products }: HomeProps) {
         {products.map(product => {
           return (
             <Product 
-              href={`/product/${product.id}`} 
               key={product.id} 
               className="keen-slider__slide"
-              prefetch={false}
             >
               <Image src={product.imageUrl} width={520} height={480} alt=""/>
 
@@ -50,7 +57,7 @@ export default function Home({ products }: HomeProps) {
                   <strong>{product.name}</strong>
                   <span>{product.price}</span>
                 </section>
-                <Bag>
+                <Bag onClick={handleAddProductToBag}>
                   <Handbag size={30} weight="bold" color="white"/>
                 </Bag>
 

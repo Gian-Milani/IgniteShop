@@ -1,7 +1,6 @@
 import { styled } from "..";
 import Link from "next/link";
 
-
 export const HomeContainer = styled('main', {
   display: 'flex',
   // gap: '3rem',
@@ -11,7 +10,7 @@ export const HomeContainer = styled('main', {
   minHeight: 656,
 });
 
-export const Product = styled(Link, {
+export const Product = styled('div', {
   background: 'linear-gradient(180deg, #1EA483 0%,  #7465D4 100%)',
   borderRadius: 8,
   // padding: '0.25rem',
@@ -73,18 +72,19 @@ export const Product = styled(Link, {
   }
 });
 
-export const Bag = styled('div', {
+export const Bag = styled('button', {
   width: '3rem',
   height: '3rem',
   borderRadius: 6,
   backgroundColor: '$green500',
+  border: 'none',
 
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   cursor: 'pointer',
 
-  transition: 'background 400ms',
+  transition: 'background 200ms',
 
   '&:hover': {
     backgroundColor: '$green300'

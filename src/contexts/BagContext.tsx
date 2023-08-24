@@ -10,7 +10,8 @@ interface ProductProps {
 }
 
 interface BagContextProps {
-  bagList: ProductProps[]
+  bagList: ProductProps[],
+  addProductToBag: () => void;
 }
 
 interface BagContextProviderProps {
@@ -22,10 +23,26 @@ export const BagContext = createContext({} as BagContextProps)
 export function BagContextProvider({ children }: BagContextProviderProps ){
   const [bagList, setBagList] = useState<ProductProps[]>([])
 
+  function addProductToBag() {
+    setBagList(
+      [
+        {
+          id: '1',
+          name: 'Camiseta',
+          imageUrl: '',
+          price: '10.00',
+          description: 'Teste nova camiseta',
+          defaultPriceId: ''
+        }
+      ]
+    )
+  };
+
   return (
     <BagContext.Provider 
       value={{
-        bagList
+        bagList,
+        addProductToBag
       }}
     > 
       {children} 
