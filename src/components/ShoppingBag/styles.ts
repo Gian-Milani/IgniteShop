@@ -50,6 +50,7 @@ export const CloseContainer = styled('div', {
 export const BagItensContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',  
+  overflow: 'auto',
 
   h3: {
     marginBottom: '2rem',
@@ -107,6 +108,7 @@ export const BagResumeContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: '0.8rem',
+  marginTop: '1.5rem',
 
   p: {
     display: 'flex',

@@ -4,8 +4,9 @@ import { stripe } from '../../lib/stripe';
 import Stripe from 'stripe';
 import Image from 'next/image';
 import axios from 'axios';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Head from 'next/head';
+import { BagContext, ProductProps as AddProductProps } from '../../contexts/BagContext';
 
 interface ProductProps {
   product: {
@@ -21,24 +22,30 @@ interface ProductProps {
 export default function Product({ product }: ProductProps) {
   const [isCreatingCheckoutSection, setIsCreateCheckoutSection] = useState(false);
 
-  async function handleBuyProduct() {
-    try {
-      setIsCreateCheckoutSection(true);
+  const { bagList, addProductToBag, productExistsInBag } = useContext(BagContext)
 
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId
-      })
-
-      const { checkoutUrl } = response.data;
-
-      window.location.href = checkoutUrl;
-
-    } catch (err) {
-      setIsCreateCheckoutSection(false);
-      alert('Erro ao redirecionar para o checkout!')
-
-    }
+  function handleAddProductToBag(product: AddProductProps) {
+    addProductToBag(product);
   }
+
+  // async function handleBuyProduct() {
+  //   try {
+  //     setIsCreateCheckoutSection(true);
+
+  //     const response = await axios.post('/api/checkout', {
+  //       priceId: product.defaultPriceId
+  //     })
+
+  //     const { checkoutUrl } = response.data;
+
+  //     window.location.href = checkoutUrl;
+
+  //   } catch (err) {
+  //     setIsCreateCheckoutSection(false);
+  //     alert('Erro ao redirecionar para o checkout!')
+
+  //   }
+  // }
 
   return (
     <>
@@ -57,7 +64,13 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button onClick={handleBuyProduct} disabled={isCreatingCheckoutSection}>Comprar Agora</button>
+          <button 
+            onClick={() => handleAddProductToBag(product)}
+            disabled={productExistsInBag(product.id)}
+          >
+            Colocar na sacola
+          </button>
+
         </ProductDetails>
       </ProductContainer>
     </>

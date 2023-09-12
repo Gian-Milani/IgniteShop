@@ -15,11 +15,12 @@ export const BagContainer = styled('div', {
   display: 'flex'
 })
 
-export const Bag = styled('div', {
+export const Bag = styled('button', {
   width: '3rem',
   height: '3rem',
   borderRadius: 6,
   backgroundColor: '$gray800',
+  border: 'none',
 
   display: 'flex',
   justifyContent: 'center',
@@ -31,7 +32,12 @@ export const Bag = styled('div', {
     transition: '400ms',
   },
 
-  '&:hover': {
+  '&:disabled':{
+    opacity: 0.6,
+    cursor: 'not-allowed'
+  },
+
+  '&:not(:disabled):hover': {
     svg: {
       opacity: 1
     },

@@ -11,7 +11,8 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css';
 import { Handbag } from "phosphor-react";
 import { useContext } from "react";
-import { BagContext } from "../contexts/BagContext";
+import { BagContext, ProductProps } from "../contexts/BagContext";
+import Link from "next/link";
 
 interface HomeProps {
   products: {
@@ -30,11 +31,10 @@ export default function Home({ products }: HomeProps) {
     }
   })
 
-  const { bagList, addProductToBag } = useContext(BagContext)
+  const { addProductToBag, productExistsInBag } = useContext(BagContext)
 
-  function handleAddProductToBag() {
-    addProductToBag();
-    console.log(bagList)
+  function handleAddProductToBag(product: ProductProps) {
+    addProductToBag(product)
   }
 
   return (
@@ -50,14 +50,19 @@ export default function Home({ products }: HomeProps) {
               key={product.id} 
               className="keen-slider__slide"
             >
-              <Image src={product.imageUrl} width={520} height={480} alt=""/>
+              <Link href={`/product/${product.id}`}>
+                <Image src={product.imageUrl} width={520} height={480} alt=""/>
+              </Link>
 
               <footer>
                 <section>                
                   <strong>{product.name}</strong>
                   <span>{product.price}</span>
                 </section>
-                <Bag onClick={handleAddProductToBag}>
+                <Bag 
+                  onClick={() => handleAddProductToBag(product)} 
+                  disabled={productExistsInBag(product.id)}
+                >
                   <Handbag size={30} weight="bold" color="white"/>
                 </Bag>
 

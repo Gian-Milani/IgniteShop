@@ -72,6 +72,8 @@ export const Product = styled('div', {
   }
 });
 
+export const ProductLink = styled(Link, {})
+
 export const Bag = styled('button', {
   width: '3rem',
   height: '3rem',
@@ -86,7 +88,12 @@ export const Bag = styled('button', {
 
   transition: 'background 200ms',
 
-  '&:hover': {
+  '&:disabled':{
+    opacity: 0.6,
+    cursor: 'not-allowed'
+  },
+
+  '&:not(:disabled):hover': {
     backgroundColor: '$green300'
   }
 

@@ -1,7 +1,6 @@
 import { ShoppingBagContainer, CloseContainer, BagItensContainer, ItemContainer, ImageContainer, DescriptionContainer, BagResumeContainer} from "./styles";
 import { X } from 'phosphor-react';
 import Image from 'next/image';
-import shirt from '../../assets/t-shirt.svg'
 import { useContext } from "react";
 import { BagContext } from "../../contexts/BagContext";
 
@@ -11,7 +10,16 @@ interface ShoppingBagProps {
 
 export function ShoppingBag ({ handleBag }: ShoppingBagProps) {
 
-  const { bagList } = useContext(BagContext)
+  const { bagList, removeProductFromBag } = useContext(BagContext)
+
+  let bagTotalValue = 0
+  for (let i = 0; i < bagList.length; i++) {
+    bagTotalValue += Number(bagList[i].price.replace('R$', '').replace(',', '.'))
+  }
+
+  function handleRemoveProductFromBag(productId: string){
+    removeProductFromBag(productId)
+  }
 
   return (
     <ShoppingBagContainer>
@@ -29,28 +37,30 @@ export function ShoppingBag ({ handleBag }: ShoppingBagProps) {
             return (
               <ItemContainer key={product.id}>
                 <ImageContainer>
-                  <Image src={shirt} width={100} height={96} color='white' alt="" />
+                  <Image src={product.imageUrl} width={100} height={96} color='white' alt="" />
                 </ImageContainer>
 
                 <DescriptionContainer>
                   <h4>{product.name}</h4>
                   <strong>{product.price}</strong>
-                  <button>Remover</button>
+                  <button onClick={() => handleRemoveProductFromBag(product.id)}>
+                    Remover
+                  </button>
                 </DescriptionContainer>
               </ItemContainer>
-              )
+              )              
           })}
         </BagItensContainer>
 
         <BagResumeContainer>
           <p>
             <span>Quantidade</span>
-            <span>3 Itens</span>
+            <span>{bagList.length} Itens</span>
           </p>
 
           <p>
             <strong>Valor Total</strong>
-            <strong>R$250,00</strong>
+            <strong>R${bagTotalValue.toFixed(2).toString().replace('.', ',')}</strong>
           </p>
 
           <button>Finalizar Compra</button>

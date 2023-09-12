@@ -1,17 +1,17 @@
 import { ReactNode, createContext, useState } from "react";
 
-interface ProductProps {
+export interface ProductProps {
   id: string,
   name: string,
   imageUrl: string,
   price: string,
-  description: string,
-  defaultPriceId: string,  
 }
 
 interface BagContextProps {
   bagList: ProductProps[],
-  addProductToBag: () => void;
+  addProductToBag: (product: ProductProps) => void,
+  productExistsInBag: (productId: string) => boolean,
+  removeProductFromBag: (productId: string) => void,
 }
 
 interface BagContextProviderProps {
@@ -23,26 +23,44 @@ export const BagContext = createContext({} as BagContextProps)
 export function BagContextProvider({ children }: BagContextProviderProps ){
   const [bagList, setBagList] = useState<ProductProps[]>([])
 
-  function addProductToBag() {
+  function addProductToBag(product: ProductProps) {
     setBagList(
-      [
+      [ 
+        ...bagList,
         {
-          id: '1',
-          name: 'Camiseta',
-          imageUrl: '',
-          price: '10.00',
-          description: 'Teste nova camiseta',
-          defaultPriceId: ''
+          id: product.id,
+          name: product.name,
+          imageUrl: product.imageUrl,
+          price: product.price,
         }
       ]
     )
   };
 
+  function productExistsInBag(productId: string) {
+    for (const item of bagList) {
+      if (item.id === productId) {
+        return true; 
+      }
+    }
+    return false; 
+  };
+
+  function removeProductFromBag(productId: string){
+    const newBagList = bagList.filter((product: ProductProps) => {
+      return product.id !== productId
+    })
+
+    setBagList([...newBagList])
+  }
+
   return (
     <BagContext.Provider 
       value={{
         bagList,
-        addProductToBag
+        addProductToBag,
+        productExistsInBag,
+        removeProductFromBag
       }}
     > 
       {children} 

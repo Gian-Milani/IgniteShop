@@ -5,6 +5,7 @@ import { Handbag } from 'phosphor-react'
 import Image from 'next/image'
 import logoImg from '../../assets/logo.svg'
 import { BagContext } from '../../contexts/BagContext';
+import Link from 'next/link';
 
 
 export function Header(){
@@ -16,13 +17,17 @@ export function Header(){
     setBagActive(action)
   }
 
+  const isBagDisabled = bagList.length === 0
+
   return (
     <HeaderContainer>
-      <Image src={logoImg} alt="" />
+      <Link href='/'>
+        <Image src={logoImg} alt="" />
+      </Link>
 
       <BagContainer>
-        <Bag onClick={() => handleBag(true)}>
-          <Handbag size={24} weight="bold"/>
+        <Bag onClick={() => handleBag(true)} disabled={isBagDisabled}>
+          <Handbag size={24} weight="bold" color='white'/>
         </Bag>
 
         {bagList.length !== 0 ? <BagNotification>{bagList.length}</BagNotification> : <></>}
