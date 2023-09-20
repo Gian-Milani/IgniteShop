@@ -32,23 +32,23 @@ export function ShoppingBag ({ handleBag }: ShoppingBagProps) {
         
         <BagItensContainer>
           <h3>Sacola de compras</h3>
+          {bagList.length === 0 ? <p>Seu carinho está vazio :(</p> : 
+            bagList.map((product) => {
+              return (
+                <ItemContainer key={product.id}>
+                  <ImageContainer>
+                    <Image src={product.imageUrl} width={100} height={96} color='white' alt="" />
+                  </ImageContainer>
 
-          {bagList.map((product) => {
-            return (
-              <ItemContainer key={product.id}>
-                <ImageContainer>
-                  <Image src={product.imageUrl} width={100} height={96} color='white' alt="" />
-                </ImageContainer>
-
-                <DescriptionContainer>
-                  <h4>{product.name}</h4>
-                  <strong>{product.price}</strong>
-                  <button onClick={() => handleRemoveProductFromBag(product.id)}>
-                    Remover
-                  </button>
-                </DescriptionContainer>
-              </ItemContainer>
-              )              
+                  <DescriptionContainer>
+                    <h4>{product.name}</h4>
+                    <strong>{product.price}</strong>
+                    <button onClick={() => handleRemoveProductFromBag(product.id)}>
+                      Remover
+                    </button>
+                  </DescriptionContainer>
+                </ItemContainer>
+                )              
           })}
         </BagItensContainer>
 
