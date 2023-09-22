@@ -8,7 +8,17 @@ export const HeaderContainer = styled('div', {
 
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between'
+  variants: {
+    align: {
+      'center': {
+        justifyContent: 'center',
+      },
+      'space': {
+        justifyContent: 'space-between',
+      }
+    }
+
+  }
 })
 
 export const BagContainer = styled('div', {

@@ -5,6 +5,7 @@ export interface ProductProps {
   name: string,
   imageUrl: string,
   price: string,
+  defaultPriceId: string,
 }
 
 interface BagContextProps {
@@ -32,6 +33,7 @@ export function BagContextProvider({ children }: BagContextProviderProps ){
           name: product.name,
           imageUrl: product.imageUrl,
           price: product.price,
+          defaultPriceId: product.defaultPriceId
         }
       ]
     )

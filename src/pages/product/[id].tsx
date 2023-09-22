@@ -3,8 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { stripe } from '../../lib/stripe';
 import Stripe from 'stripe';
 import Image from 'next/image';
-import axios from 'axios';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Head from 'next/head';
 import { BagContext, ProductProps as AddProductProps } from '../../contexts/BagContext';
 
@@ -20,32 +19,12 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  const [isCreatingCheckoutSection, setIsCreateCheckoutSection] = useState(false);
 
-  const { bagList, addProductToBag, productExistsInBag } = useContext(BagContext)
+  const { addProductToBag, productExistsInBag } = useContext(BagContext)
 
   function handleAddProductToBag(product: AddProductProps) {
     addProductToBag(product);
   }
-
-  // async function handleBuyProduct() {
-  //   try {
-  //     setIsCreateCheckoutSection(true);
-
-  //     const response = await axios.post('/api/checkout', {
-  //       priceId: product.defaultPriceId
-  //     })
-
-  //     const { checkoutUrl } = response.data;
-
-  //     window.location.href = checkoutUrl;
-
-  //   } catch (err) {
-  //     setIsCreateCheckoutSection(false);
-  //     alert('Erro ao redirecionar para o checkout!')
-
-  //   }
-  // }
 
   return (
     <>

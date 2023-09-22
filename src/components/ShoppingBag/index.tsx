@@ -1,16 +1,18 @@
 import { ShoppingBagContainer, CloseContainer, BagItensContainer, ItemContainer, ImageContainer, DescriptionContainer, BagResumeContainer} from "./styles";
 import { X } from 'phosphor-react';
 import Image from 'next/image';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { BagContext } from "../../contexts/BagContext";
+import axios from "axios";
 
 interface ShoppingBagProps {
   handleBag: (action) => void;
 }
 
 export function ShoppingBag ({ handleBag }: ShoppingBagProps) {
-
   const { bagList, removeProductFromBag } = useContext(BagContext)
+
+  const [isCreatingCheckoutSection, setIsCreateCheckoutSection] = useState(false);
 
   let bagTotalValue = 0
   for (let i = 0; i < bagList.length; i++) {
@@ -19,6 +21,25 @@ export function ShoppingBag ({ handleBag }: ShoppingBagProps) {
 
   function handleRemoveProductFromBag(productId: string){
     removeProductFromBag(productId)
+  }
+
+  async function handleCheckout() {
+    try {
+      setIsCreateCheckoutSection(true)
+
+      const response = await axios.post('/api/checkout', {
+        products: bagList,
+      })
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+
+
+    } catch (error) {
+      setIsCreateCheckoutSection(false)
+      alert ('Falha ao redirecionar ao checkout!')
+    }
   }
 
   return (
@@ -63,7 +84,10 @@ export function ShoppingBag ({ handleBag }: ShoppingBagProps) {
             <strong>R${bagTotalValue.toFixed(2).toString().replace('.', ',')}</strong>
           </p>
 
-          <button>Finalizar Compra</button>
+          <button
+            onClick={handleCheckout}
+            disabled={isCreatingCheckoutSection}
+          >Finalizar Compra</button>
         </BagResumeContainer>
       </main>
     </ShoppingBagContainer>
