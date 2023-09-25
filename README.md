@@ -8,22 +8,22 @@
 
 ## Features
 - 👕 T-shirt buying website
-![Home page](.src/assets/home.png)
+![Home page](./src/assets/home.png)
 
 - 🖱️ Select one or more t-shirts for the backpack
-![Change a t-shirt](.src/assets/change.png)
+![Change a t-shirt](./src/assets/change.png)
 
 - 👀 You can see the t-shirt details by clicking on the t-shirt
-![T-shirt page](.src/assets/shirt-page.png)
+![T-shirt page](./src/assets/shirt-page.png)
 
 - 🛍️ By clicking on the backpack you can see the selected t-shirts and finalize your purchase
-![Backpack](.src/assets/bag.png)
+![Backpack](./src/assets/bag.png)
 
 - 💳 You will be redirect to the Stripe checkout. Enter your details to confirm the purchase
-![Stripe checkout](.src/assets/stripe.png)
+![Stripe checkout](./src/assets/stripe.png)
 
 - ✅ When confirming the purchase you will be redirected to the success page
-![Success](.src/assets/success.png)
+![Success](./src/assets/success.png)
 
 ## Technologies used
  - HTML
